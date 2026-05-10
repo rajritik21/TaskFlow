@@ -10,9 +10,15 @@ const app = express();
 const port = 5001;
 dotenv.config();
 const corsOptions = {
-  origin: ['https://task-flow-f7jkica2n-rajritik21s-projects.vercel.app,https://task-flow-r9ketxcd3-rajritik21s-projects.vercel.app','http://localhost:3000'], // Your frontend URL
-  methods: 'GET,POST,PUT,DELETE,OPTIONS',
-  allowedHeaders: 'Content-Type,Authorization',
+  origin: ['https://task-flow-f7jkica2n-rajritik21s-projects.vercel.app',
+    'https://task-flow-r9ketxcd3-rajritik21s-projects.vercel.app',
+    'http://localhost:3000',
+    'https://task-flow-tau-teal.vercel.app',
+    'https://task-flow-git-main-rajritik21s-projects.vercel.app',
+    'https://task-flow-gc6fhky9m-rajritik21s-projects.vercel.app'
+
+
+  ],
   credentials: true, // Allow cookies/headers if needed
   optionsSuccessStatus: 200 // Some older browsers choke on 204
 };
