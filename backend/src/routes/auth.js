@@ -7,8 +7,7 @@ const auth = require('../middleware/auth');
 // Register
 router.post('/register', async (req, res) => {
     try {
-        console.log("REGISTER API HIT");
-        console.log(req.body);
+       
         const { username, email, password } = req.body;
         
         // Check if user already exists
