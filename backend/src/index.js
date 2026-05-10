@@ -12,7 +12,7 @@ dotenv.config();
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000', 'https://rajritik21.github.io'],
+    origin: ['http://localhost:3000', 'https://rajritik21.github.io','https://task-flow-f7jkica2n-rajritik21s-projects.vercel.app'],
     credentials: true
 }));
 
