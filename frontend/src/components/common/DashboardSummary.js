@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Assignment, Group, CheckCircle, Warning } from '@mui/icons-material';
+import { Assignment, CheckCircle, Warning } from '@mui/icons-material';
 
 const DashboardSummary = () => {
   const [stats, setStats] = useState({
@@ -19,7 +19,7 @@ const DashboardSummary = () => {
         const headers = { Authorization: `Bearer ${token}` };
 
         // We can fetch all these concurrently to get counts
-        const [tasksRes, projectsRes, teamsRes] = await Promise.all([
+        const [tasksRes] = await Promise.all([
           axios.get(`http://localhost:5001/api/tasks?limit=1000`, { headers }),
           axios.get(`http://localhost:5001/api/projects?limit=1`, { headers }),
           axios.get(`http://localhost:5001/api/teams?limit=1`, { headers })

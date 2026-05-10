@@ -65,7 +65,10 @@ const TasksView = () => {
 
   useEffect(() => {
     fetchTasks();
-  }, [page, search, filterStatus, filterProject, filterMember, startDate, endDate]);
+  }
+  // , 
+  // [page, search, filterStatus, filterProject, filterMember, startDate, endDate]
+);
 
   useEffect(() => {
     fetchProjectsAndUsers();

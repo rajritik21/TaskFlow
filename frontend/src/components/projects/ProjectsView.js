@@ -46,7 +46,7 @@ const ProjectsView = () => {
 
   useEffect(() => {
     fetchProjects();
-  }, [page, search]);
+  });
 
   useEffect(() => {
     fetchTeams();

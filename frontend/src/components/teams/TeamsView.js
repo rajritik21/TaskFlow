@@ -33,7 +33,9 @@ const TeamsView = () => {
 
   useEffect(() => {
     fetchTeams();
-  }, [page, search]);
+  }
+  // , [page, search]
+);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
