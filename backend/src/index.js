@@ -7,23 +7,24 @@ const taskRoutes = require('./routes/tasks');
 
 // Initialize express app
 const app = express();
-const port = 5001;
+const port = process.env.PORT || 5001;
 dotenv.config();
 const corsOptions = {
-  origin: ['https://task-flow-f7jkica2n-rajritik21s-projects.vercel.app',
+  origin: [
+    'https://task-flow-f7jkica2n-rajritik21s-projects.vercel.app',
     'https://task-flow-r9ketxcd3-rajritik21s-projects.vercel.app',
-    'http://localhost:3000',
     'https://task-flow-tau-teal.vercel.app',
     'https://task-flow-git-main-rajritik21s-projects.vercel.app',
-    'https://task-flow-gc6fhky9m-rajritik21s-projects.vercel.app'
-
-
+    'https://task-flow-gc6fhky9m-rajritik21s-projects.vercel.app',
+    'http://localhost:3000'
   ],
-  credentials: true, // Allow cookies/headers if needed
-  optionsSuccessStatus: 200 // Some older browsers choke on 204
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 };
 // Middleware
 app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
