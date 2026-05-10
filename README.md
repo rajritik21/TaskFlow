@@ -137,4 +137,5 @@ This project is licensed under the MIT License.
 - JWT Authentication
 
 ## Screenshots
-
+![Dashboard](image.png)!
+[Profile](image-1.png)
