@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../../config';
 import { Assignment, CheckCircle, Warning } from '@mui/icons-material';
 
 const DashboardSummary = () => {
@@ -20,9 +21,9 @@ const DashboardSummary = () => {
 
         // We can fetch all these concurrently to get counts
         const [tasksRes] = await Promise.all([
-          axios.get(`http://localhost:5001/api/tasks?limit=1000`, { headers }),
-          axios.get(`http://localhost:5001/api/projects?limit=1`, { headers }),
-          axios.get(`http://localhost:5001/api/teams?limit=1`, { headers })
+          axios.get(`${API_BASE_URL}/api/tasks?limit=1000`, { headers }),
+          axios.get(`${API_BASE_URL}/api/projects?limit=1`, { headers }),
+          axios.get(`${API_BASE_URL}/api/teams?limit=1`, { headers })
         ]);
 
         const tasks = tasksRes.data.tasks || [];
@@ -36,8 +37,8 @@ const DashboardSummary = () => {
         // Let's just use the array length since we fetched limit 1000 for tasks.
         
         // Let's refetch projects/teams with limit 1000 for accurate count
-        const allProjects = await axios.get(`http://localhost:5001/api/projects?limit=1000`, { headers });
-        const allTeams = await axios.get(`http://localhost:5001/api/teams?limit=1000`, { headers });
+        const allProjects = await axios.get(`${API_BASE_URL}/api/projects?limit=1000`, { headers });
+        const allTeams = await axios.get(`${API_BASE_URL}/api/teams?limit=1000`, { headers });
 
         setStats({
           totalTasks: tasks.length,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Typography, Button, TextField, List, ListItem, ListItemText, Box } from '@mui/material';
 import { useAuth } from '../context/AuthContext';
+import API_BASE_URL from '../config';
 import axios from 'axios';
 
 const TaskList = () => {
@@ -12,7 +13,7 @@ const TaskList = () => {
 
   const fetchTasks = async () => {
     try {
-      const response = await axios.get('http://localhost:5001/api/tasks', {
+      const response = await axios.get(`${API_BASE_URL}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks(response.data);
@@ -28,7 +29,7 @@ const TaskList = () => {
   const handleAddTask = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5001/api/tasks', newTask, {
+      await axios.post(`${API_BASE_URL}/api/tasks`, newTask, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNewTask({ title: '', description: '' });
@@ -40,7 +41,7 @@ const TaskList = () => {
 
   const handleDeleteTask = async (taskId) => {
     try {
-      await axios.delete(`http://localhost:5001/api/tasks/${taskId}`, {
+      await axios.delete(`${API_BASE_URL}/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchTasks();

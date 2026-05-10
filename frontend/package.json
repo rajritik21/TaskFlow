@@ -1,6 +1,5 @@
 {
   "name": "taskflow-frontend",
-  "homepage": "https://rajritik21.github.io/taskflow",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -47,7 +46,6 @@
   "devDependencies": {
     "gh-pages": "^6.3.0"
   },
-  "homepage": "https://rajritik21.github.io/Task_Manager",
 "scripts": {
   "start": "react-scripts start",
   "build": "react-scripts build",

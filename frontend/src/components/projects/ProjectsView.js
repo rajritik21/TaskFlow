@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../../config';
 import { Add, Edit, Delete, Search, Close } from '@mui/icons-material';
 
 const ProjectsView = () => {
@@ -19,7 +20,7 @@ const ProjectsView = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await axios.get(`http://localhost:5001/api/projects`, {
+      const res = await axios.get(`${API_BASE_URL}/api/projects`, {
         params: { page, limit: 9, search },
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -35,7 +36,7 @@ const ProjectsView = () => {
   const fetchTeams = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.get(`http://localhost:5001/api/teams?limit=100`, {
+      const res = await axios.get(`${API_BASE_URL}/api/teams?limit=100`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTeams(res.data.teams);
@@ -57,11 +58,11 @@ const ProjectsView = () => {
     try {
       const token = localStorage.getItem('token');
       if (currentProject) {
-        await axios.put(`http://localhost:5001/api/projects/${currentProject._id}`, formData, {
+        await axios.put(`${API_BASE_URL}/api/projects/${currentProject._id}`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
-        await axios.post(`http://localhost:5001/api/projects`, formData, {
+        await axios.post(`${API_BASE_URL}/api/projects`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
@@ -76,7 +77,7 @@ const ProjectsView = () => {
     if (window.confirm('Are you sure you want to delete this project?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/projects/${id}`, {
+        await axios.delete(`${API_BASE_URL}/api/projects/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchProjects();

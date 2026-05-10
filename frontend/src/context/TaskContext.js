@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import axios from 'axios';
+import API_BASE_URL from '../config';
 
 const TaskContext = createContext();
 
@@ -8,7 +9,7 @@ export const TaskProvider = ({ children }) => {
 
   const fetchTasks = async (token) => {
     try {
-      const response = await axios.get('http://localhost:5001/api/tasks', {
+      const response = await axios.get(`${API_BASE_URL}/api/tasks`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks(response.data);
@@ -19,7 +20,7 @@ export const TaskProvider = ({ children }) => {
 
   const addTask = async (token, task) => {
     try {
-      await axios.post('http://localhost:5001/api/tasks', task, {
+      await axios.post(`${API_BASE_URL}/api/tasks`, task, {
         headers: { Authorization: `Bearer ${token}` }
       });
       fetchTasks(token);
@@ -38,7 +39,7 @@ export const TaskProvider = ({ children }) => {
         throw new Error('Invalid task ID');
       }
       
-      const response = await axios.put(`http://localhost:5001/api/tasks/${taskId}`, updatedTask, {
+      const response = await axios.put(`${API_BASE_URL}/api/tasks/${taskId}`, updatedTask, {
         headers: { Authorization: `Bearer ${token}` }
       });
       
@@ -64,7 +65,7 @@ export const TaskProvider = ({ children }) => {
 
   const deleteTask = async (token, taskId) => {
     try {
-      await axios.delete(`http://localhost:5001/api/tasks/${taskId}`, {
+      await axios.delete(`${API_BASE_URL}/api/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       // Refresh tasks list after deletion

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import API_BASE_URL from '../../config';
 import { MailOutline, LockOutlined, PersonOutline } from '@mui/icons-material';
 
 const Auth = () => {
@@ -27,7 +28,7 @@ const Auth = () => {
         ? { email: formData.email, password: formData.password }
         : formData;
 
-      const res = await axios.post(`http://localhost:5001${endpoint}`, payload);
+      const res = await axios.post(`${API_BASE_URL}${endpoint}`, payload);
       
       // Assume the API returns { token, user }
       login(res.data.token, res.data.user);

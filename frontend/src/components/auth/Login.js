@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Box, TextField, Button, Typography, Container, IconButton } from '@mui/material';
+import { Box, TextField, Button, Typography, IconButton } from '@mui/material';
 import { useAuth } from '../context/AuthContext';
+import API_BASE_URL from '../config';
 import axios from 'axios';
 
 // Font Awesome icons
@@ -42,7 +43,7 @@ const Login = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5001/api/auth/login', loginData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, loginData);
       login(response.data.token);
       navigate('/tasks');
     } catch (error) {
@@ -53,7 +54,7 @@ const Login = () => {
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5001/api/auth/register', registerData);
+      await axios.post(`${API_BASE_URL}/api/auth/register`, registerData);
       alert('Registration successful! Please login.');
       setIsActive(false);
     } catch (error) {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
+import API_BASE_URL from '../../config';
 import { Edit, CameraAlt, Save, Close } from '@mui/icons-material';
 
 const ProfileView = () => {
@@ -27,7 +28,7 @@ const ProfileView = () => {
     setMessage({ text: 'Updating...', type: 'info' });
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.put(`http://localhost:5001/api/auth/profile`, profileData, {
+      const res = await axios.put(`${API_BASE_URL}/api/auth/profile`, profileData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMessage({ text: 'Profile updated successfully!', type: 'success' });
@@ -48,7 +49,7 @@ const ProfileView = () => {
 
     try {
       const token = localStorage.getItem('token');
-      await axios.put(`http://localhost:5001/api/auth/change-password`, {
+      await axios.put(`${API_BASE_URL}/api/auth/change-password`, {
         currentPassword: passwordData.currentPassword,
         newPassword: passwordData.newPassword
       }, {

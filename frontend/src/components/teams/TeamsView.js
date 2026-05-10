@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Add, Edit, Delete, Search, Close } from '@mui/icons-material';
+import API_BASE_URL from '../../config';
 
 const TeamsView = () => {
   const [teams, setTeams] = useState([]);
@@ -18,7 +19,7 @@ const TeamsView = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await axios.get(`http://localhost:5001/api/teams`, {
+      const res = await axios.get(`${API_BASE_URL}/api/teams`, {
         params: { page, limit: 9, search },
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -42,11 +43,11 @@ const TeamsView = () => {
     try {
       const token = localStorage.getItem('token');
       if (currentTeam) {
-        await axios.put(`http://localhost:5001/api/teams/${currentTeam._id}`, formData, {
+        await axios.put(`${API_BASE_URL}/api/teams/${currentTeam._id}`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
       } else {
-        await axios.post(`http://localhost:5001/api/teams`, formData, {
+        await axios.post(`${API_BASE_URL}/api/teams`, formData, {
           headers: { Authorization: `Bearer ${token}` }
         });
       }
@@ -61,7 +62,7 @@ const TeamsView = () => {
     if (window.confirm('Are you sure you want to delete this team?')) {
       try {
         const token = localStorage.getItem('token');
-        await axios.delete(`http://localhost:5001/api/teams/${id}`, {
+        await axios.delete(`${API_BASE_URL}/api/teams/${id}`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         fetchTeams();
