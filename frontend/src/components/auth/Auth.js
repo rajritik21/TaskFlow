@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import API_BASE_URL from '../../config';
-import { MailOutline, LockOutlined, PersonOutline } from '@mui/icons-material';
+import { MailOutline, LockOutlined, PersonOutline, Visibility, VisibilityOff } from '@mui/icons-material';
+
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -12,6 +13,7 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const[showPassword, setShowPassword] = useState (false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -97,7 +99,7 @@ const Auth = () => {
             />
           </div>
 
-          <div style={{ position: 'relative' }}>
+          {/* <div style={{ position: 'relative' }}>
             <LockOutlined style={{ position: 'absolute', top: '50%', left: '16px', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input 
               type="password" 
@@ -109,7 +111,53 @@ const Auth = () => {
               onChange={handleChange}
               required
             />
-          </div>
+          </div> */}
+          <div style={{ position: 'relative' }}>
+  
+  <LockOutlined
+    style={{
+      position: 'absolute',
+      top: '50%',
+      left: '16px',
+      transform: 'translateY(-50%)',
+      color: 'var(--text-muted)'
+    }}
+  />
+
+  <input
+    type={showPassword ? 'text' : 'password'}
+    name="password"
+    placeholder="Password"
+    className="modern-input"
+    style={{
+      paddingLeft: '48px',
+      paddingRight: '48px'
+    }}
+    value={formData.password}
+    onChange={handleChange}
+    required
+  />
+
+  <button
+    type="button"
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: 'absolute',
+      top: '50%',
+      right: '14px',
+      transform: 'translateY(-50%)',
+      border: 'none',
+      background: 'transparent',
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+      color: 'var(--text-muted)'
+    }}
+  >
+    {showPassword ? <VisibilityOff /> : <Visibility />}
+  </button>
+
+</div>
 
           <button type="submit" className="modern-btn modern-btn-primary" disabled={loading} style={{ marginTop: '10px' }}>
             {loading ? 'Processing...' : (isLogin ? 'Sign In' : 'Sign Up')}
