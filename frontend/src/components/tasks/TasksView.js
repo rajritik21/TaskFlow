@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useCallback} from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../../config';
 import { Add, Edit, Delete, Search, Close } from '@mui/icons-material';
@@ -24,7 +24,7 @@ const TasksView = () => {
   const [currentTask, setCurrentTask] = useState(null);
   const [formData, setFormData] = useState({ title: '', description: '', status: 'todo', priority: 'medium', projectId: '', assignedTo: '', dueDate: '' });
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -48,7 +48,7 @@ const TasksView = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, search, filterStatus, filterProject, filterMember, startDate, endDate]);
 
   const fetchProjectsAndUsers = async () => {
     try {
@@ -67,8 +67,8 @@ const TasksView = () => {
   useEffect(() => {
     fetchTasks();
   }
-  // , 
-  // [page, search, filterStatus, filterProject, filterMember, startDate, endDate]
+  , 
+  [fetchTasks]
 );
 
   useEffect(() => {

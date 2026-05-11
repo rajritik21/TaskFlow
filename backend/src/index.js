@@ -16,7 +16,8 @@ const corsOptions = {
     'https://task-flow-tau-teal.vercel.app',
     'https://task-flow-git-main-rajritik21s-projects.vercel.app',
     'https://task-flow-gc6fhky9m-rajritik21s-projects.vercel.app',
-    'http://localhost:3000'
+    'http://localhost:3000',
+    'http://localhost:5000'
   ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],

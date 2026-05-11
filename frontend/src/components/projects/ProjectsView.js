@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useCallback } from 'react';
 import axios from 'axios';
 import API_BASE_URL from '../../config';
 import { Add, Edit, Delete, Search, Close } from '@mui/icons-material';
@@ -16,7 +16,7 @@ const ProjectsView = () => {
   const [currentProject, setCurrentProject] = useState(null);
   const [formData, setFormData] = useState({ name: '', description: '', teamId: '' });
 
-  const fetchProjects = async () => {
+  const fetchProjects = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -31,7 +31,7 @@ const ProjectsView = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, search]);
 
   const fetchTeams = async () => {
     try {
@@ -46,8 +46,8 @@ const ProjectsView = () => {
   };
 
   useEffect(() => {
-    fetchProjects();
-  });
+  fetchProjects();
+}, [fetchProjects]);
 
   useEffect(() => {
     fetchTeams();
@@ -146,6 +146,11 @@ const ProjectsView = () => {
                 </div>
               </div>
             ))}
+             {projects.length === 0 && (
+               <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+                 No projects match your filters.
+               </div>
+            )}
           </div>
 
           {totalPages > 1 && (

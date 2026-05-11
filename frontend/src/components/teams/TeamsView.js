@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect ,useCallback} from 'react';
 import axios from 'axios';
 import { Add, Edit, Delete, Search, Close } from '@mui/icons-material';
 import API_BASE_URL from '../../config';
@@ -15,7 +15,7 @@ const TeamsView = () => {
   const [currentTeam, setCurrentTeam] = useState(null);
   const [formData, setFormData] = useState({ name: '', description: '' });
 
-  const fetchTeams = async () => {
+  const fetchTeams = useCallback(async () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
@@ -30,13 +30,12 @@ const TeamsView = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [page, search]);
 
   useEffect(() => {
     fetchTeams();
-  }
-  // , [page, search]
-);
+  }, [fetchTeams]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -130,6 +129,11 @@ const TeamsView = () => {
                 </div>
               </div>
             ))}
+             {teams.length === 0 && (
+               <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--text-muted)' }}>
+                 No teams match your filters.
+               </div>
+            )}
           </div>
 
           {totalPages > 1 && (
